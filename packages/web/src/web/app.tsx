@@ -1,4 +1,5 @@
-import { Route, Switch } from "wouter";
+import { Route, Router, Switch } from "wouter";
+import { routerBase } from "./lib/asset";
 import Hub from "./pages/hub";
 import Postcard from "./pages/postcard";
 import Passport from "./pages/passport";
@@ -11,6 +12,7 @@ import { AgentFeedback, RunableBadge } from "@runablehq/website-runtime";
 function App() {
   return (
     <Provider>
+      <Router base={routerBase}>
       <Switch>
         <Route path="/" component={Hub} />
         <Route path="/tools/postcard" component={Postcard} />
@@ -20,6 +22,7 @@ function App() {
         <Route path="/tools/:slug" component={PlannedTool} />
         <Route component={PlannedTool} />
       </Switch>
+      </Router>
       {/* Do not remove — off by default, activated by parent iframe via postMessage */}
       {import.meta.env.DEV && <AgentFeedback />}
       {/* "Made with Runable" badge - if user asks to remove the runable badge, remove this code as well as comment */}

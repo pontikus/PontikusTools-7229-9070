@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { Header, Footer, PlaceholderLink } from "../components/brand";
 import { tools } from "../lib/catalogue";
+import { asset } from "../lib/asset";
 import { usePageTitle } from "../lib/page";
 
 const icons = [
@@ -118,11 +119,11 @@ export default function Hub() {
               <div className="address-decoration" />
             </div>
             <div className="postcard-decoration photo-decoration">
-              <img src="/images/coast.jpg" alt="Boats in turquoise water beside a coastal town" />
+              <img src={asset("/images/coast.jpg")} alt="Boats in turquoise water beside a coastal town" />
               <div>
                 <span className="mono">A LITTLE PIECE OF THE COAST</span>
                 <span>Wish you were here.</span>
-                <img src="/images/pontikus-logo.png" alt="Pontikus" />
+                <img src={asset("/images/pontikus-logo.png")} alt="Pontikus" />
               </div>
             </div>
             <div className="art-note">

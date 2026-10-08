@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { tools } from "../lib/catalogue";
+import { asset } from "../lib/asset";
 import { ToolShell, FrameControl } from "../components/tool-shell";
 import {
   CanvasPreview,
@@ -9,8 +10,9 @@ import {
   useCanvasPages,
 } from "../components/canvas-maker";
 import { renderPhotoFrame, type PhotoFrameData } from "../lib/photo-frame-canvas";
+const SAMPLE_PHOTO = asset("/images/coast.jpg");
 let draft: PhotoFrameData = {
-  photo: "/images/coast.jpg",
+  photo: SAMPLE_PHOTO,
   caption: "A moment by the sea.",
   location: "The coast",
   credit: "",
@@ -48,7 +50,7 @@ export default function PhotoFrame() {
           if (photos[0]) update({ photo: photos[0] });
         }}
       />
-      {data.photo === "/images/coast.jpg" && (
+      {data.photo === SAMPLE_PHOTO && (
         <p className="sample-note">
           Sample coastal photograph shown. Add your own photograph to replace it.
         </p>

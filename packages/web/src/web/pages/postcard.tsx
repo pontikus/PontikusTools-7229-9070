@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Download, Upload, Check, ArrowRight, RotateCcw, ImagePlus } from "lucide-react";
 import { ToolShell, FrameControl } from "../components/tool-shell";
 import { regions, tools } from "../lib/catalogue";
+import { asset } from "../lib/asset";
 import { useFrameGate } from "../lib/frame-gate";
 import { drawPostcard, WIDTH, HEIGHT, type PostcardData } from "../lib/postcard-canvas";
 
@@ -13,7 +14,7 @@ const defaults: PostcardData = {
   sender: "Alex",
   signOff: "With love,",
   layout: "classic",
-  photo: "/images/coast.jpg",
+  photo: asset("/images/coast.jpg"),
   removeFrame: false,
 };
 let sessionDraft = { ...defaults };
