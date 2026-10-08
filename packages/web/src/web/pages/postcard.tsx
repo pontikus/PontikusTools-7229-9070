@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Download, Upload, Check, ArrowRight, RotateCcw, ImagePlus } from "lucide-react";
 import { ToolShell, FrameControl } from "../components/tool-shell";
-import { regions } from "../lib/catalogue";
+import { regions, tools } from "../lib/catalogue";
+import { useFrameGate } from "../lib/frame-gate";
 import { drawPostcard, WIDTH, HEIGHT, type PostcardData } from "../lib/postcard-canvas";
 
 // Module memory survives internal navigation, but not a refresh. No localStorage.
@@ -10,6 +11,7 @@ const defaults: PostcardData = {
   message:
     "Salt in the air, a quiet harbour and nowhere we need to be. Saving a little piece of this coast for you.",
   sender: "Alex",
+  signOff: "With love,",
   layout: "classic",
   photo: "/images/coast.jpg",
   removeFrame: false,
@@ -38,6 +40,8 @@ async function canvasBlob(canvas: HTMLCanvasElement) {
   );
 }
 export default function Postcard() {
+  const gate = useFrameGate();
+  const tool = tools.find((t) => t.slug === "postcard")!;
   const [data, setData] = useState(sessionDraft),
     [side, setSide] = useState<"front" | "back">("front"),
     [busy, setBusy] = useState(""),
@@ -74,7 +78,7 @@ export default function Postcard() {
     return () => {
       cancelled = true;
     };
-  }, [data, side]);
+  }, [data, side, gate]);
   async function upload(file?: File) {
     if (!file) return;
     setError("");
@@ -215,6 +219,15 @@ export default function Postcard() {
         <span className="counter mono">{data.message.length} / 220</span>
       </label>
       <label className="field">
+        Sign-off
+        <input
+          aria-label="Sign-off"
+          value={data.signOff}
+          maxLength={45}
+          onChange={(e) => update("signOff", e.target.value)}
+        />
+      </label>
+      <label className="field">
         Sender name
         <input
           aria-label="Sender name"
@@ -331,9 +344,10 @@ export default function Postcard() {
   );
   return (
     <ToolShell
-      title="Postcard Maker"
+      title={tool.name}
       description="Send a little piece of your coast. A photograph, a few words, and something worth keeping."
-      number={1}
+      number={tool.number}
+      audience={tool.audience}
       form={form}
       preview={preview}
     />

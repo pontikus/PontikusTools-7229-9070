@@ -1,5 +1,10 @@
 // Edit names, promises and statuses here. The hub reads this one catalogue.
 export type ToolStatus = "Live" | "In build" | "Planned";
+export const audiences: Record<string, string> = {
+  "sea-lovers": "Sea Lovers",
+  "coastal-experts": "Coastal Experts",
+  "shoreline-businesses": "Shoreline Businesses",
+};
 export const tools: {
   number: number;
   name: string;
@@ -21,7 +26,7 @@ export const tools: {
     name: "Passport Page Builder",
     slug: "passport",
     promise: "Turn the places you’ve been into a page to keep.",
-    status: "Planned",
+    status: "Live",
     audience: "sea-lovers",
   },
   {
@@ -29,7 +34,7 @@ export const tools: {
     name: "Trip Journal",
     slug: "journal",
     promise: "Keep the moments the camera might miss.",
-    status: "Planned",
+    status: "Live",
     audience: "sea-lovers",
   },
   {
@@ -37,7 +42,7 @@ export const tools: {
     name: "Photo Frame Maker",
     slug: "photo-frame",
     promise: "Give your coastal photographs a considered frame.",
-    status: "Planned",
+    status: "Live",
     audience: "sea-lovers",
   },
   {
@@ -143,9 +148,16 @@ export const regions = [
   "Southern Europe",
   "Western Europe",
 ];
+let frameRemovalLocked = false;
 export const settings = {
   verifyUrl: "[VERIFY URL]",
   suggestionUrl: "[SUGGESTION FORM URL]",
   // Change to true when profile verification is connected. No gating in this prototype.
-  gateFrameRemoval: false,
+  get gateFrameRemoval() {
+    return frameRemovalLocked;
+  },
+  set gateFrameRemoval(locked: boolean) {
+    frameRemovalLocked = locked;
+    if (typeof window !== "undefined") window.dispatchEvent(new Event("pontikus-frame-gate"));
+  },
 };

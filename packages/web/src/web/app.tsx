@@ -1,6 +1,9 @@
 import { Route, Switch } from "wouter";
 import Hub from "./pages/hub";
 import Postcard from "./pages/postcard";
+import Passport from "./pages/passport";
+import Journal from "./pages/journal";
+import PhotoFrame from "./pages/photo-frame";
 import PlannedTool from "./pages/planned-tool";
 import { Provider } from "./components/provider";
 import { AgentFeedback, RunableBadge } from "@runablehq/website-runtime";
@@ -11,6 +14,9 @@ function App() {
       <Switch>
         <Route path="/" component={Hub} />
         <Route path="/tools/postcard" component={Postcard} />
+        <Route path="/tools/passport" component={Passport} />
+        <Route path="/tools/journal" component={Journal} />
+        <Route path="/tools/photo-frame" component={PhotoFrame} />
         <Route path="/tools/:slug" component={PlannedTool} />
         <Route component={PlannedTool} />
       </Switch>

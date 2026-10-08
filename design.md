@@ -7,7 +7,8 @@ Mobile-first: 44px targets, clear focus states, responsive card grids and stacke
 Hub: 14 catalogue cards grouped into three audiences, one live maker. Tool shell: four steps, form left, live canvas preview right, front/back selection and downloads.
 Exports: A6 landscape, 1748×1240 pixels at approximately 300dpi. All data and photo processing stay in browser memory; no API calls, storage or authentication. Sample photo is clearly identified.
 Locked frame-removal presentation with configurable gating, initially ungated. Placeholders for verification and suggestion URLs open a labelled information dialog rather than a broken external link.
-Only stage one is implemented; other tools have honest planned-state shells.
+Stage two: tools 1–4 share the four-step shell, configurable frame, explicit font-loading and session-only drafts. Passport is one A4 page with up to 12 stamp entries. Journal is up to seven A4 pages with three photos each. Photo frame uses square/vertical social canvases. Cream, midnight navy and minimal styles remain consistent with the original workshop.
+Embed mode removes site navigation while keeping maker controls and privacy wording. Audience labels and live counts read the catalogue. Tools 5–14 remain planned.
 # <App Name> — Design
 
 > Starter design brief. Replace this content with the app you're building before writing any UI.

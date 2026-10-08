@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, X } from "lucide-react";
 import { settings } from "../lib/catalogue";
+import { isEmbed } from "../lib/page";
 
 export function Brand() {
   return (
@@ -10,12 +11,13 @@ export function Brand() {
         <img src="/images/pontikus-logo.png" alt="" />
       </span>
       <span>
-        PONTIKUS<span className="brand-sub">THE COAST, CONNECTED.</span>
+        PONTIKUS<span className="brand-sub">United by the coast. Built by the sea.</span>
       </span>
     </Link>
   );
 }
 export function Header({ compact = false }: { compact?: boolean }) {
+  if (isEmbed()) return null;
   return (
     <header className="header">
       <div className="header-inner">
@@ -95,10 +97,11 @@ export function PlaceholderLink({
   );
 }
 export function Footer() {
+  if (isEmbed()) return null;
   return (
     <footer className="footer">
       <Brand />
-      <span>A considered place to make coastal things.</span>
+      <span>United by the coast. Built by the sea.</span>
       <span className="mono">PONTIKUS.COM</span>
     </footer>
   );

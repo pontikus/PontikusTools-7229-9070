@@ -1,10 +1,12 @@
 // The live preview IS the export canvas: no server, screenshot service or hidden upload.
+import { effectiveRemoveFrame, loadExportFonts } from "./canvas-utils";
 export const WIDTH = 1748,
   HEIGHT = 1240;
 export type PostcardData = {
   region: string;
   message: string;
   sender: string;
+  signOff: string;
   layout: string;
   photo: string;
   removeFrame: boolean;
@@ -60,14 +62,15 @@ export async function drawPostcard(
   data: PostcardData,
   side: "front" | "back",
 ) {
-  await document.fonts.ready;
+  await loadExportFonts();
+  const removeFrame = effectiveRemoveFrame(data.removeFrame);
   const [photo, logo] = await Promise.all([image(data.photo), image("/images/pontikus-logo.png")]);
   const c = canvas.getContext("2d")!;
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   c.fillStyle = cream;
   c.fillRect(0, 0, WIDTH, HEIGHT);
-  const bottom = data.removeFrame ? HEIGHT : HEIGHT - 78;
+  const bottom = removeFrame ? HEIGHT : HEIGHT - 78;
   if (side === "front") {
     if (data.layout === "classic") {
       cover(c, photo, 48, 48, WIDTH - 96, bottom - 265);
@@ -133,7 +136,7 @@ export async function drawPostcard(
     c.font = "36px Archivo";
     text(
       c,
-      data.sender ? "With love,\n" + data.sender : "Your name",
+      [data.signOff, data.sender].filter(Boolean).join("\n"),
       80,
       Math.min(end + 100, bottom - 145),
       WIDTH * 0.59 - 155,
@@ -157,7 +160,7 @@ export async function drawPostcard(
       c.stroke();
     }
   }
-  if (!data.removeFrame) {
+  if (!removeFrame) {
     c.fillStyle = cream;
     c.fillRect(0, HEIGHT - 78, WIDTH, 78);
     c.strokeStyle = "#d9d3c6";

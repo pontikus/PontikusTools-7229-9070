@@ -2,9 +2,11 @@ import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Anchor } from "lucide-react";
 import { Header, PlaceholderLink } from "../components/brand";
 import { tools } from "../lib/catalogue";
+import { isEmbed, usePageTitle } from "../lib/page";
 export default function PlannedTool() {
   const { slug } = useParams<{ slug: string }>();
   const tool = tools.find((t) => t.slug === slug);
+  usePageTitle(`${tool?.name || "Page not found"} | Pontikus Boatyard`);
   return (
     <>
       <Header compact />
@@ -21,10 +23,12 @@ export default function PlannedTool() {
         <Link href="/tools/postcard" className="button">
           Try Postcard Maker <ArrowRight size={18} />
         </Link>
-        <Link href="/" className="text-link">
-          <ArrowLeft size={16} />
-          Back to all tools
-        </Link>
+        {!isEmbed() && (
+          <Link href="/" className="text-link">
+            <ArrowLeft size={16} />
+            Back to all tools
+          </Link>
+        )}
         {tool && (
           <PlaceholderLink kind="suggestion" className="inline-link">
             Suggest a tool

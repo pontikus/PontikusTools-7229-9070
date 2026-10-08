@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { Header, Footer, PlaceholderLink } from "../components/brand";
 import { tools } from "../lib/catalogue";
+import { usePageTitle } from "../lib/page";
 
 const icons = [
   Camera,
@@ -65,6 +66,10 @@ const groups = [
   },
 ];
 export default function Hub() {
+  usePageTitle("Pontikus Boatyard | Maker tools for the coast");
+  const liveCount = tools.filter((tool) => tool.status === "Live").length;
+  const buildCount = tools.filter((tool) => tool.status === "In build").length;
+  const plannedCount = tools.filter((tool) => tool.status === "Planned").length;
   return (
     <>
       <Header />
@@ -136,9 +141,11 @@ export default function Hub() {
         </section>
         <div className="workshop-strip">
           <span className="mono">THE WORKSHOP, AT A GLANCE</span>
-          <span>14 tools. Three ways to belong.</span>
+          <span>{tools.length} tools. Three ways to belong.</span>
           <span className="mono">
-            <span className="dot" /> ONE LIVE · MORE ON THE HORIZON
+            <span className="dot" /> {liveCount} LIVE
+            {buildCount > 0 ? ` · ${buildCount} IN BUILD` : ""}
+            {plannedCount > 0 ? ` · ${plannedCount} PLANNED` : ""}
           </span>
         </div>
         <div className="catalogue">

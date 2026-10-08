@@ -2,6 +2,79 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Shared repeatable-entry and multi-page controls for sea-lover makers. */
+.entry-card {
+  border: 1px solid var(--line);
+  padding: 14px;
+  margin: 18px 0;
+  border-radius: 3px;
+}
+.entry-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.add-entry {
+  width: 100%;
+  margin-top: 15px;
+}
+.page-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+.page-tabs button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #bfc2b7;
+  border-radius: 3px;
+  font-size: 11px;
+  background: var(--cream);
+}
+.page-tabs button.active {
+  background: var(--navy);
+  color: var(--cream);
+  border-color: var(--navy);
+}
+.photo-upload-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px;
+  border: 1px dashed #b9b7a7;
+  background: #f8f5ed;
+  min-height: 50px;
+}
+.photo-upload-label input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.photo-thumbs {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.photo-thumbs > div {
+  position: relative;
+  width: 90px;
+}
+.photo-thumbs img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+.photo-thumbs .icon-button {
+  width: 100%;
+  background: #eae5d9;
+}
+
 /* Brand tokens: change these to update the whole workshop. */
 :root {
   --navy: #0b1f3b;
